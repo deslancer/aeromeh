@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+    <title>AEROMEH</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Babylon.js -->
+    <script src="vendor/jquery-3.5.1.min.js"></script>
+    <script src="vendor/babylon.js"></script>
+    <script src="vendor/dat.gui.min.js"></script>
+    <script src="vendor/babylonjs.loaders.min.js"></script>
+    <script src="vendor/babylonjs.postProcess.min.js"></script>
+    <script src="vendor/babylon.gui.min.js"></script>
+    <script src="js/shadow_only.js"></script>
+    <script src="js/Materials.js"></script>
+    <script src="js/Hotspots.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/main.js"></script>
+
+</head>
+<body>
+<div class="preload_container">
+    <div id="preloader">
+        <!--<div class="logo">
+            <img width="300" src="assets/images/logo_white.svg" alt="logo">
+        </div>-->
+        <div class="progressbar">
+            <div class="dot_container">
+                <div class='spinner-container'>
+                    <div class="dot"></div>
+                    <div class="spinner-path">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+                <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+                    <defs>
+                        <filter id="gooey">
+                            <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+                            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 21 -7" result="goo" />
+                            <feBlend in="SourceGraphic" in2="goo" />
+                        </filter>
+                    </defs>
+                </svg>
+            </div>
+        </div>
+            <div id="bar" class="bar"></div>
+        </div>
+</div>
+<div id="overlay" class="overlay"></div>
+
+<a href="#" title="Help" id="info">
+    <svg version="1.1" id="Layer_1" focusable="false" xmlns="http://www.w3.org/2000/svg"
+         xmlns:xlink="http://www.w3.org/1999/xlink"
+         x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+        <path d="M256,8C119,8,8,119.1,8,256c0,137,111,248,248,248s248-111,248-248C504,119.1,393,8,256,8z M256,456
+            c-110.5,0-200-89.4-200-200c0-110.5,89.5-200,200-200c110.5,0,200,89.5,200,200C456,366.5,366.6,456,256,456z M363.2,200.8
+            c0,67.1-72.4,68.1-72.4,92.9v6.3c0,6.6-5.4,12-12,12h-45.6c-6.6,0-12-5.4-12-12v-8.7c0-35.7,27.1-50,47.6-61.5
+            c17.6-9.8,28.3-16.5,28.3-29.6c0-17.2-22-28.7-39.8-28.7c-23.2,0-33.9,11-48.9,30c-4.1,5.1-11.5,6.1-16.7,2.1l-27.8-21.1
+            c-5.1-3.9-6.3-11.1-2.6-16.4c23.6-34.7,53.7-54.2,100.6-54.2C310.9,112,363.2,150.3,363.2,200.8z M298,368c0,23.2-18.8,42-42,42
+            s-42-18.8-42-42s18.8-42,42-42S298,344.8,298,368z"/>
+</svg>
+</a>
+<a href="https://aeromeh.com.ua/" id="customer_logo">
+    <div class="redline"></div>
+    <img width="100" src="assets/images/logo_aeromeh.png" alt="logo">
+</a>
+
+<div class="arrows_container">
+    <div class="action_arrows">
+        <div id="bwd" class="a_arrow">
+            <p class="arrow_l"><img width="10" src="assets/images/caret-left-solid.svg" alt="angle"></p>
+        </div>
+        <div class="dots_container">
+            <div class="action_dots">
+                <div class="a_dot" data-text="Открыть камеру сепарации" id="open"></div>
+                <div class="a_dot" data-text="Начать сепарацию" id="start"></div>
+                <div class="a_dot" data-text="Результаты сортировки" id="result"></div>
+            </div>
+            <div class="message_box"><p>Выбор действия</p></div>
+        </div>
+        <div id="fwd" class="a_arrow">
+            <p class="arrow_r"><img width="10" src="assets/images/caret-right-solid.svg" alt="angle"></p>
+            <div class="redline"></div>
+        </div>
+
+    </div>
+</div>
+
+
+<canvas id="renderCanvas"></canvas>
+<div class="result">
+    <div class="result_img">
+        <div class="img_container">
+            <div class="number_circle">
+                <div>2</div>
+            </div>
+            <img src="assets/images/2.jpg"
+                 alt="good">
+            <p>Посевной материал или товарное зерно</p>
+
+        </div>
+        <div class="img_container">
+            <div class="number_circle">
+                <div>3</div>
+            </div>
+            <img src="assets/images/3.jpg"
+                     alt="good">
+            <p>Посевной материал или товарное зерно</p>
+
+        </div>
+        <div class="img_container">
+            <div class="number_circle">
+                <div>4</div>
+            </div>
+            <img src="assets/images/4.jpg"
+                     alt="bad">
+            <p>Товарное зерно или фураж</p>
+        </div>
+        <div class="img_container">
+            <div class="number_circle">
+                <div>5</div>
+            </div>
+            <img src="assets/images/5.jpg"
+                     alt="bad">
+            <p>Фураж или мертвые отходы</p>
+        </div>
+        <div class="img_container">
+            <div class="number_circle">
+                <div>6</div>
+            </div>
+            <img src="assets/images/6.jpg"
+                     alt="aspiration">
+            <p>Аспирация</p>
+
+        </div>
+        <a class="shop_btn" target="_blank" href="https://aeromeh.com.ua/catalog/separatory-sad-s-ciklonom/">
+            <div><img class="click_icon" src="assets/images/click.svg" width="48" alt="click"></div>
+
+            <div class="msg_pc">сайт <br> АЭРОМЕХ</div>
+            <div class="msg_mob">Перейти на сайт АЭРОМЕХ</div>
+        </a>
+        
+    </div>
+</div>
+
+<video style="display: none" id="particles_video" muted="muted" data-src="assets/test_3_alpha_v6.webm" preload="none"
+       width="480" height="270">
+    <source src="" type='video/webm; codecs="vorbis,vp8"'/>
+</video>
+
+<div class="instructions">
+    <div><h3>Инструкция</h3></div>
+    <ol>
+        <li>Чтобы начать работу, откройте крышку устройства (нажмите левую клавишу мыши на крышку)</li>
+        <li>Нажмите на хотспот "Начать сепарацию" возле панели управления</li>
+        <li>Чтобы увидеть результаты сепарации нажмите на хотспот "Остановить сепарацию" возле панели управления и
+            дождитесь окончания сепарации
+        </li>
+        <li>Чтобы вернуть центр внимания в первоначальное положение нажмите правой кнопкой мыши в любом месте сцены</li>
+        <li>Чтобы приблизить камеру к центру внимания прокрутите колесико мыши до удовлетворительного результата</li>
+    </ol>
+</div>
+<a class="copyright" href="https://3dtour.ua" target="_blank">
+    <p id="logo3dtour">created by 3DTOUR.AGENCY</p>
+    <p class="copyright_dot"></p>
+    <p class="copyright_line"></p>
+</a>
+</body>
+</html>

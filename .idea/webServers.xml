@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="5468e446-9a5e-4175-b2ec-f16e15fcd0ed" name="MAIN" url="https//ehdev.pp.ua/AEROMEH/index.html">
+        <fileTransfer rootFolder="/home/admin/web/ehdev.pp.ua/public_html/AEROMEH" accessType="SFTP" host="167.114.0.235" port="26" sshConfigId="f3498c3c-bf3e-45b2-aca9-c48edb7ecc89" sshConfig="admin@167.114.0.235:26 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
